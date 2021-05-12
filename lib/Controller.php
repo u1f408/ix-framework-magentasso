@@ -8,7 +8,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use EasyCSRF\EasyCSRF;
-use EasyCSRF\NativeCookieProvider;
 
 class Controller extends \ix\Controller\Controller {
 	/** @var HtmlRenderer $html */
@@ -23,7 +22,13 @@ class Controller extends \ix\Controller\Controller {
 	public function __construct(?ContainerInterface $container) {
 		parent::__construct($container);
 		$this->html = new HtmlRenderer();
-		$this->csrf = new EasyCSRF(new NativeCookieProvider());
+
+		if ($this->container->has('session')) {
+			$session_provider = new \ix\Session\EasyCSRFSessionProvider($this->container->get('session'));
+			$this->csrf = new EasyCSRF($session_provider);
+		} else {
+			$this->csrf = new EasyCSRF(new \EasyCSRF\NativeCookieProvider());
+		}
 	}
 
 	/**
