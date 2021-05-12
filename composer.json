@@ -1,0 +1,32 @@
+{
+    "name": "u1f408/ix-framework-magentasso",
+    "description": "A set of controllers for ix-framework to implement MagentaSSO authentication",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Iris System",
+            "email": "iris@iris.ac.nz"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/u1f408/ix-framework"
+        }
+    ],
+    "require": {
+        "magentasso/magentasso-php": "^0.1",
+        "u1f408/ix-framework": "dev-main",
+        "u1f408/phphelpers": "^0.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.86",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "ixMagentaSSO\\": "lib/"
+        }
+    }
+}
